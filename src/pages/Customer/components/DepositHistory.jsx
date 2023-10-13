@@ -28,10 +28,10 @@ const DepositHistory = ({ payment, iconSuccess, iconRequest, iconError, iconOrde
 
   return (
     <div className="flex justify-between items-center p-2 px-3 border-b mt-2 font-mono">
-      <div className="flex items-center gap-2">
+      <p className="flex items-center gap-2">
         {status} {formatPrice(payment.amount)} /{' '}
         <span className="text-xs text-gray-600">{formatDate(payment.createdAt.seconds)}</span>
-      </div>
+      </p>
       <p className={`p-2 font-mono text-sm font-bold ${clsStatus}`}>
         {STATE_PAYMENT_CUSTOMER_VI[getKeyByValue(STATE_PAYMENT, payment.status)]}
       </p>

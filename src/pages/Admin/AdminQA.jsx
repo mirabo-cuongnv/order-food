@@ -11,7 +11,7 @@ const AdminQA = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [banks, setBanks] = useState([]);
   const [QACodeInfo, setQACodeInfo] = useState([]);
-  console.log(QACodeInfo);
+
   const handleCreateQAInfo = (e) => {
     e.preventDefault();
 
@@ -27,11 +27,6 @@ const AdminQA = () => {
       })
       .catch(() => console.log('tao that bai'))
       .finally(() => setIsOpen(false));
-    // console.log(
-    //   `${import.meta.env.VITE_API_QA_CODE}/${payload.bankId}-${
-    //     payload.accountNo
-    //   }-${TEMPLATE_QA_CODE}.png`,
-    // );
   };
 
   useEffect(() => {
@@ -71,7 +66,7 @@ const AdminQA = () => {
             </p>
           </div>
 
-          <Button text="Cập nhật QA code" />
+          <Button text="Cập nhật QA code" onClick={() => setIsOpen(true)} />
         </>
       ) : (
         <Button text="Tạo thông tin QA code" onClick={() => setIsOpen(true)} />
@@ -87,6 +82,7 @@ const AdminQA = () => {
           </div>
         }
         onSave={handleCreateQAInfo}
+        onClose={() => setIsOpen(false)}
       />
     </div>
   );

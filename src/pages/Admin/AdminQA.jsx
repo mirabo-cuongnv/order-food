@@ -4,14 +4,15 @@ import Modal from '../../components/Modal';
 import Select from '../../components/Select';
 import TextField from '../../components/TextField';
 import { getValuesInform } from '../../utils/functions';
-import { TEMPLATE_QA_CODE } from '../../constant/template';
-import { addDocument, getDocment } from '../../lib/firebase/service';
+import { addDocument } from '../../lib/firebase/service';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { db } from '../../lib/firebase/config';
 
 const AdminQA = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [banks, setBanks] = useState([]);
   const [QACodeInfo, setQACodeInfo] = useState([]);
-
+  console.log(QACodeInfo);
   const handleCreateQAInfo = (e) => {
     e.preventDefault();
 
@@ -44,11 +45,19 @@ const AdminQA = () => {
   }, []);
 
   useEffect(() => {
-    getDocment('admin-create', 'qaCode')
-      .then((res) => {
-        setQACodeInfo(res);
-      })
-      .catch(() => console.log('tao that bai'));
+    const q = query(collection(db, 'qaCode'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const datas = [];
+      querySnapshot.forEach((doc) => {
+        datas.push(doc.data());
+      });
+
+      setQACodeInfo(datas[0]);
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (

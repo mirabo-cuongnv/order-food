@@ -8,6 +8,8 @@ const SignIn = () => {
   const onGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     const userCredential = await signInWithPopup(auth, provider);
+
+    console.log(userCredential);
   };
 
   return (

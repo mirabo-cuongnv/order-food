@@ -56,7 +56,7 @@ const CustomerWallet = () => {
         </div>
       </div>
 
-      <div className="mt-10 h-full p-5">
+      <div className="mt-10 p-5">
         <h3 className="text-lg font-medium text-gray-700 pb-5 border-b-2">Lịch sử nạp</h3>
 
         {historyPayments.length ? (

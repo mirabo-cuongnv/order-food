@@ -87,7 +87,7 @@ const CustomerDeposit = () => {
         onClose={handleClose}
         onSave={handleConfirmDeposit}
         content={
-          <div className="mx-auto w-[450px] h-[450px]">
+          <div className="mx-auto w-[450px] h-[450px] overflow-hidden">
             <img
               src={`${qaCode}?amount=${depositAmountRef.current}`}
               alt=""

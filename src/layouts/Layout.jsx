@@ -15,9 +15,9 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="container mx-auto max-w-screen-sm border rounded h-screen min-h-screen overflow-auto">
+    <div className="container mx-auto max-w-screen-sm border rounded h-screen overflow-auto">
       {user?.uid && <Header user={user} onSignOut={handleSignOut} />}
-      {children}
+      <div className="h-[calc(100%-56px)]">{children}</div>
     </div>
   );
 };

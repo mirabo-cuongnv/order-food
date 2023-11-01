@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
           photoURL,
         });
         setLoading(false);
-        if (email === 'hungpv@mirabo-global.com') {
+        if (email === 'mountain.olive.472@example.com') {
           navigate('/admin');
         } else {
           navigate('/customer');
@@ -55,6 +55,7 @@ const AuthProvider = ({ children }) => {
       } else {
         setBalance(0);
         addDocument(user?.uid, { balance: 0, ...user }, 'wallet');
+        addDocument(user?.uid, user, 'users');
       }
     });
 

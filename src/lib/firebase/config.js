@@ -24,14 +24,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
-// connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+connectAuthEmulator(auth, 'http://127.0.0.1:9099');
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
-// connectFirestoreEmulator(db, '127.0.0.1', 8080);
+connectFirestoreEmulator(db, '127.0.0.1', 8080);
 
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(app, 'gs://order-luch.appspot.com');
-// connectStorageEmulator(storage, '127.0.0.1', 9199);
+connectStorageEmulator(storage, '127.0.0.1', 9199);
 
 export { app, analytics, db, auth, storage };

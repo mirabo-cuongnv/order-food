@@ -1,8 +1,0 @@
-{
-  "/admin/page": "app/admin/page.js",
-  "/login/page": "app/login/page.js",
-  "/customer/page": "app/customer/page.js",
-  "/customer/order-info/page": "app/customer/order-info/page.js",
-  "/customer/order-edit/page": "app/customer/order-edit/page.js",
-  "/customer/order/page": "app/customer/order/page.js"
-}

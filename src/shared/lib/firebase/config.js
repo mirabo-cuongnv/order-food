@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp, getApps } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
@@ -21,8 +21,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+// const analytics = getAnalytics(app);
+
 const auth = getAuth(app);
 // connectAuthEmulator(auth, 'http://127.0.0.1:9099');
 
@@ -34,4 +36,4 @@ const db = getFirestore(app);
 const storage = getStorage(app, "gs://order-luch.appspot.com");
 // connectStorageEmulator(storage, '127.0.0.1', 9199);
 
-export { app, analytics, db, auth, storage };
+export { app, db, auth, storage };

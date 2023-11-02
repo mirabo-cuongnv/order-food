@@ -1,19 +1,16 @@
-"use client";
+'use client';
 
-import React, { useContext, useEffect, useState } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import dayjs from "dayjs";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from 'react';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import dayjs from 'dayjs';
+import axios from 'axios';
 
-import Button from "../../../shared/components/Button";
-import Modal from "../../../shared/components/Modal";
-import TextArea from "../../../shared/components/TextArea";
-import {
-  addDocument,
-  addDocumentAutoID,
-} from "../../../shared/lib/firebase/service";
-import { db } from "../../../shared/lib/firebase/config";
-import { AuthProviderContext } from "../../../shared/context/AuthProvider";
+import Button from '../../../shared/components/Button';
+import Modal from '../../../shared/components/Modal';
+import TextArea from '../../../shared/components/TextArea';
+import { addDocument, addDocumentAutoID } from '../../../shared/lib/firebase/service';
+import { db } from '../../../shared/lib/firebase/config';
+import { AuthProviderContext } from '../../../shared/context/AuthProvider';
 
 const AdminCreateDish = () => {
   const { user } = useContext(AuthProviderContext);
@@ -32,7 +29,7 @@ const AdminCreateDish = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const { dish } = Object.fromEntries(formData);
-    const payload = dish.split("\n").map((food) => `\n${food}`);
+    const payload = dish.split('\n').map((food) => `\n${food}`);
     // if (!dishs?.length) {
     //   await axios.post("/api/alert", {
     //     message: "Có cơm rồi mau vào đặt thôi",
@@ -42,27 +39,23 @@ const AdminCreateDish = () => {
     // if (!dishs.length) return;
 
     addDocument(
-      "foodName",
+      'foodName',
       {
         dishValue: payload,
         isLock: false,
-        orderDate: `${dayjs().format("DD/MM/YYYY")}`,
+        orderDate: `${dayjs().format('DD/MM/YYYY')}`,
       },
-      "dish"
+      'dish',
     )
       .then(() => {
-        console.log("tao thanh cong");
         setIsOpen(false);
         setDishs(payload);
       })
-      .catch(() => console.log("tao that bai"));
+      .catch(() => console.log('tao that bai'));
   };
 
   useEffect(() => {
-    const q = query(
-      collection(db, "dish"),
-      where("orderDate", "==", dayjs().format("DD/MM/YYYY"))
-    );
+    const q = query(collection(db, 'dish'), where('orderDate', '==', dayjs().format('DD/MM/YYYY')));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const datas = [];
@@ -86,9 +79,7 @@ const AdminCreateDish = () => {
   return (
     <div className="p-5">
       {dishs?.isLock ? (
-        <div className="text-lg font-semibold text-center pt-20">
-          Bạn đã đặt hàng ngày hôm nay
-        </div>
+        <div className="text-lg font-semibold text-center pt-20">Bạn đã đặt hàng ngày hôm nay</div>
       ) : (
         <>
           <div className="flex justify-between">

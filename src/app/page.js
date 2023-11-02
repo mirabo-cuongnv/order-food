@@ -1,15 +1,14 @@
-"use client";
+'use client';
 
-import React from "react";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import React from 'react';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
-import { auth } from "../shared/lib/firebase/config";
+import { auth } from '../shared/lib/firebase/config';
 
 const SignIn = () => {
   const onGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     const userCredential = await signInWithPopup(auth, provider);
-    console.log(userCredential);
   };
 
   return (

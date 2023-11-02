@@ -19,30 +19,32 @@ const OrderInfo = () => {
   };
 
   useEffect(() => {
-    const q = query(
-      collection(db, "orders"),
-      where("user", "==", user?.uid),
-      where("orderDate", "==", dayjs().format("DD/MM/YYYY"))
-    );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const datas = [];
-      querySnapshot.forEach((doc) => {
-        datas.push({
-          uid: doc.id,
-          ...doc.data(),
+    if (user?.id) {
+      const q = query(
+        collection(db, "orders"),
+        where("user", "==", user?.uid),
+        where("orderDate", "==", dayjs().format("DD/MM/YYYY"))
+      );
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const datas = [];
+        querySnapshot.forEach((doc) => {
+          datas.push({
+            uid: doc.id,
+            ...doc.data(),
+          });
         });
+
+        if (datas.length) {
+          setOrdered(datas[0]);
+        } else {
+          router.push("/customer/order");
+        }
       });
 
-      if (datas.length) {
-        setOrdered(datas[0]);
-      } else {
-        router.push("/customer/order");
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
+      return () => {
+        unsubscribe();
+      };
+    }
   }, [user?.uid]);
 
   return (

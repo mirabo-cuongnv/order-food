@@ -21,7 +21,7 @@ const OrderForm = ({
 }) => {
   return (
     <div className="p-10 pb-20 overflow-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-6 gap-1 max-h-[400px] h-[400px] overflow-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-6 gap-1 overflow-auto">
         {dish?.map((dishName, index) => (
           <Checkbox
             key={index}

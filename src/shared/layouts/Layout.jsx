@@ -16,8 +16,13 @@ const Layout = ({ children }) => {
   // console.log('user', user);
 
   const handleSignOut = async () => {
-    await signOut(auth);
-    router.push("/login");
+    try {
+      await signOut(auth);
+
+      router.push("/login");
+    } catch (error) {
+      router.push("/login");
+    }
   };
 
   return (

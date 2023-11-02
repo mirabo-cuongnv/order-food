@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Notifications } from 'react-push-notification';
 import AuthProvider from './context/AuthProvider';
 import SignIn from './pages/SignIn';
 import AdminRoot from './pages/Admin';
@@ -22,6 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <Notifications />
         <Routes>
           <Route path="/login" element={<SignIn />} />
           <Route path="/admin" element={<AdminRoot />}>

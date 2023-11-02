@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
           photoURL,
         });
         setLoading(false);
-        if (email === 'mountain.olive.472@example.com') {
+        if (email === 'hungpv@mirabo-global.com') {
           navigate('/admin');
         } else {
           navigate('/customer');

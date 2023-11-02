@@ -4,6 +4,9 @@ import { getAnalytics } from 'firebase/analytics';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
 import { getStorage, connectStorageEmulator } from 'firebase/storage';
+import { getMessaging, getToken } from 'firebase/messaging';
+import 'firebase/compat/messaging';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -34,4 +37,31 @@ const db = getFirestore(app);
 const storage = getStorage(app, 'gs://order-luch.appspot.com');
 // connectStorageEmulator(storage, '127.0.0.1', 9199);
 
-export { app, analytics, db, auth, storage };
+const messaging = getMessaging(app);
+function requestPermission() {
+  console.log('Requesting permission...');
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+      const app = initializeApp(firebaseConfig);
+
+      const messaging = getMessaging(app);
+      getToken(messaging, {
+        vapidKey:
+          'BFbImd9l3TS4VmjulGKzH1UiKJhtz-FcGIrCsdoCUtc76eVOIQHJH184XIZAL1BLBBBZpiDuqqk0nP3velC9OZ8',
+      }).then((currentToken) => {
+        if (currentToken) {
+          console.log('currentToken: ', currentToken);
+        } else {
+          console.log('Can not get token');
+        }
+      });
+    } else {
+      console.log('Do not have permission!');
+    }
+  });
+}
+
+requestPermission();
+
+export { app, analytics, db, auth, storage, messaging };

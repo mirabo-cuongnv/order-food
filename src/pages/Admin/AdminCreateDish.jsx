@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import dayjs from 'dayjs';
-import axios from 'axios';
+import addNotification from 'react-push-notification';
 
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
@@ -41,29 +41,14 @@ const AdminCreateDish = () => {
       .catch(() => console.log('tao that bai'));
   };
 
-  const handlePushAlert = () => {
-    // fetch('https://api.pushalert.co/rest/v1/send', {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: 'api_key=ca614ce8898523c0511f3558f5f8f02b',
-    //   },
-    //   body: JSON.stringify({
-    //     title: 'tesst',
-    //     message: 'tesst',
-    //     url: 'https://order-food-six.vercel.app',
-    //   }),
-    // });
-    axios.post(
-      'https://api.pushalert.co/rest/v1/send',
-      {
-        title: 'tesst',
-        message: 'tesst',
-        url: 'https://order-food-six.vercel.app',
-      },
-      {
-        headers: { Authorization: 'api_key=ca614ce8898523c0511f3558f5f8f02b' },
-      },
-    );
+  const buttonClick = () => {
+    addNotification({
+      title: 'Warning',
+      subtitle: 'This is a subtitle',
+      message: 'This is a very long message',
+      theme: 'darkblue',
+      native: true, // when using native, your OS will handle theming.
+    });
   };
 
   useEffect(() => {
@@ -90,7 +75,7 @@ const AdminCreateDish = () => {
 
   return (
     <div className="p-5">
-      <button onClick={handlePushAlert}>abc</button>
+      <button onClick={buttonClick}>abc</button>
       {dishs?.isLock ? (
         <div className="text-lg font-semibold text-center pt-20">Bạn đã đặt hàng ngày hôm nay</div>
       ) : (

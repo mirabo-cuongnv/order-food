@@ -130,7 +130,7 @@ const AdminOrder = () => {
 
             <div>
               <Button
-                text="Đã lấy cơm"
+                text="Thông báo"
                 disabled={!ordered.length}
                 onClick={() => setIsOpen(true)}
               />
